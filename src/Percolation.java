@@ -7,6 +7,7 @@ public class Percolation {
     private final boolean[] site;
 
     private final WeightedQuickUnionUF ufPerc;
+    private final WeightedQuickUnionUF ufFull;
     private int openSite;
     // creates n-by-n grid, with all sites initially blocked
     // 0 block
@@ -19,6 +20,7 @@ public class Percolation {
         }
         openSite = 0;
         ufPerc = new WeightedQuickUnionUF(n * n + 2);
+        ufFull = new WeightedQuickUnionUF(n * n + 1);
         site = new boolean[n * n];
         for (int i = 0; i < n * n; i++) {
             site[i] = false;
@@ -44,6 +46,7 @@ public class Percolation {
         //与人造顶端相连
         if (row == 1) {
             ufPerc.union((row - 1) * n + col - 1, topSite);
+            ufFull.union((row - 1) * n + col - 1, topSite);
         }
         //与人造底端相连
         if (row == n) {
@@ -53,18 +56,22 @@ public class Percolation {
         //左边为空
         if (inside(row - 1, col) && isOpen(row - 1, col)) {
             ufPerc.union((row - 1 - 1) * n + col - 1, (row - 1) * n + col - 1);
+            ufFull.union((row - 1 - 1) * n + col - 1, (row - 1) * n + col - 1);
         }
         //右边为空
         if (inside(row + 1, col) && isOpen(row + 1, col)) {
             ufPerc.union((row + 1 - 1) * n + col - 1, (row - 1) * n + col - 1);
+            ufFull.union((row + 1 - 1) * n + col - 1, (row - 1) * n + col - 1);
         }
         //下边为空
         if (inside(row, col + 1) && isOpen(row, col + 1)) {
             ufPerc.union((row - 1) * n + col + 1 - 1, (row - 1) * n + col - 1);
+            ufFull.union((row - 1) * n + col + 1 - 1, (row - 1) * n + col - 1);
         }
         //上边为空
         if (inside(row, col - 1) && isOpen(row, col - 1)) {
             ufPerc.union((row - 1) * n + col - 1 - 1, (row - 1) * n + col - 1);
+            ufFull.union((row - 1) * n + col - 1 - 1, (row - 1) * n + col - 1);
         }
     }
 
@@ -89,7 +96,7 @@ public class Percolation {
         if (!isOpen(row, col)) {
             return false;
         }
-        if (ufPerc.find((row - 1) * n + col - 1) == ufPerc.find(topSite)) {
+        if (ufFull.find((row - 1) * n + col - 1) == ufFull.find(topSite)) {
             return true;
         }
         return false;
@@ -107,7 +114,6 @@ public class Percolation {
         }
         return false;
     }
-
 
 
 }

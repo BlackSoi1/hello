@@ -8,11 +8,12 @@ public class PercolationStats {
     private static final double CONFIDENCE_95 =1.96;
     // perform independent trials on an n-by-n grid
     public PercolationStats(int n, int trials) {
+        if (n <= 0 || trials <= 0) {
+            throw new IllegalArgumentException("N and T must be >0");
+        }
         this.trails = trials;
         samples = new double[trials];
-        if (n <= 0 || trials <= 0) {
-            throw new java.lang.IllegalArgumentException();
-        }
+
         for (int i = 0; i < trials; i++) {
             Percolation pl = new Percolation(n);
             while (!pl.percolates()) {
