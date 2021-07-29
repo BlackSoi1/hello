@@ -108,8 +108,6 @@ public class Percolation {
         return false;
     }
 
-    // test client (optional)
-    // public static void main(String[] args) {
-    //
+
 
 }
