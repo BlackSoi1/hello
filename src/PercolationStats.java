@@ -58,10 +58,10 @@ public class PercolationStats {
         //     return;
         // }
         // try{
-            int n = Integer.parseInt(args[0]);
-            int trails = Integer.parseInt(args[1]);
-            // int n = StdIn.readInt();
-            // int trails = StdIn.readInt();
+        //     int n = Integer.parseInt(args[0]);
+        //     int trails = Integer.parseInt(args[1]);
+            int n = StdIn.readInt();
+            int trails = StdIn.readInt();
             PercolationStats pls = new PercolationStats(n, trails);
             double mean = pls.mean();
             double stddev = pls.stddev();

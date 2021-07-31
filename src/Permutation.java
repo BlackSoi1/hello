@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 public class Permutation {
     public static void main(String[] args) {
-        RandomizedQueue<String> rqt = new RandomizedQueue<String>();
+        RandomizedQueue2<String> rqt = new RandomizedQueue2<String>();
 
         while (!StdIn.isEmpty()) {
             String str = StdIn.readString();
